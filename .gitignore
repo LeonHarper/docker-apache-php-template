@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 ./.env
 ./apache/certs/
+=======
+.env
+apache/certs
+>>>>>>> 1a4b7e16e659c6cbb949e8b2f7eac97f9e63b05c
