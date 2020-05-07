@@ -5,10 +5,12 @@ services:
       context: './php/'
       args:
        PHP_VERSION: ${PHP_VERSION}
+       EWH_SHARED_LIBS_DIR: ${EWH_SHARED_LIBS_DIR}
     networks:
       - backend
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
+      - ${PROJECT_ROOT}/ewh-shared-libs/:/var/www/ewh-shared-libs/
     container_name: php
   apache:
     build:
@@ -16,6 +18,7 @@ services:
       args:
        APACHE_VERSION: ${APACHE_VERSION}
        PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
+       EWH_SHARED_LIBS_DIR: ${EWH_SHARED_LIBS_DIR}
     depends_on:
       - php
     networks:
@@ -26,8 +29,10 @@ services:
       - "443:443"
     environment:
         PRIMARY_DOMAIN: "${PRIMARY_DOMAIN}"
+        EWH_SHARED_LIBS_DIR: ${EWH_SHARED_LIBS_DIR}
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
+      - ${PROJECT_ROOT}/ewh-shared-libs/:/var/www/ewh-shared-libs/
     container_name: apache
 networks:
   frontend: 
