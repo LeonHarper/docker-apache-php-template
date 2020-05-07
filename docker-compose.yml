@@ -15,6 +15,7 @@ services:
       context: './apache/'
       args:
        APACHE_VERSION: ${APACHE_VERSION}
+       PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
     depends_on:
       - php
     networks:
@@ -23,6 +24,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    environment:
+        PRIMARY_DOMAIN: "${PRIMARY_DOMAIN}"
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
     container_name: apache
