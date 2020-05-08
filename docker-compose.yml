@@ -11,6 +11,8 @@ services:
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
       - ${PROJECT_ROOT}/ewh-shared-libs/:/var/www/ewh-shared-libs/
+    extra_hosts:
+      - ${DB_SERVER}:${DB_IP}
     container_name: php
   apache:
     build:
@@ -33,6 +35,8 @@ services:
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
       - ${PROJECT_ROOT}/ewh-shared-libs/:/var/www/ewh-shared-libs/
+    extra_hosts:
+      - ${DB_SERVER}:${DB_IP}
     container_name: apache
 networks:
   frontend: 
