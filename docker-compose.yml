@@ -6,11 +6,13 @@ services:
       args:
        PHP_VERSION: ${PHP_VERSION}
        EWH_SHARED_LIBS_DIR: ${EWH_SHARED_LIBS_DIR}
+       HOST_IP: ${HOST_IP}
     networks:
       - backend
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
       - ${PROJECT_ROOT}/ewh-shared-libs/:/var/www/ewh-shared-libs/
+      - ${PROJECT_ROOT}/ewh-main-site/admin:/var/www/admin/
     extra_hosts:
       - ${DB_SERVER}:${DB_IP}
     container_name: php
@@ -30,11 +32,13 @@ services:
       - "80:80"
       - "443:443"
     environment:
-        PRIMARY_DOMAIN: "${PRIMARY_DOMAIN}"
+        PRIMARY_DOMAIN: ${PRIMARY_DOMAIN}
         EWH_SHARED_LIBS_DIR: ${EWH_SHARED_LIBS_DIR}
+        EWH_MAIN_SITE_ROOT_DIR: ${EWH_MAIN_SITE_ROOT_DIR}
     volumes:
       - ${PROJECT_ROOT}/ewh-main-site/public_html:/var/www/html/
       - ${PROJECT_ROOT}/ewh-shared-libs/:/var/www/ewh-shared-libs/
+      - ${PROJECT_ROOT}/ewh-main-site/admin:/var/www/admin/
     extra_hosts:
       - ${DB_SERVER}:${DB_IP}
     container_name: apache

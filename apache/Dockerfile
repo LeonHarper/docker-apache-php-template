@@ -9,7 +9,8 @@ RUN apk update; \
 # the ARG without setting a value, will make it take the default value from the ARG defined in the global stage. 
 ARG PRIMARY_DOMAIN
 ARG EWH_SHARED_LIBS_DIR
-RUN echo EWH_SHARED_LIBS_DIR 
+ARG EWH_ADMIN
+ARG EWH_MAIN_SITE_ROOT_DIR
 
 # Copy apache vhost file to proxy php requests to php-fpm container
 COPY default.apache.conf /usr/local/apache2/conf/${PRIMARY_DOMAIN}.apache.conf
